@@ -1,6 +1,6 @@
 import type { MetaFunction } from "@remix-run/node"
 import { useNavigate } from "@remix-run/react"
-import {Button, Typography} from '@mui/material'
+import {Button} from '@mui/material'
 
 import { pageTitle } from "~/config/page"
 
@@ -12,9 +12,9 @@ const TestPage = () => {
   const navigate = useNavigate();
   return (
     <div>
-      <Typography variant="h1"> This is a Test Page</Typography>
-      <Button variant="contained" onClick={() => navigate(-1)}>
-        Go Back!
+      <h1>This is a Test Page!</h1>
+      <Button variant="outlined" onClick={() => navigate(-1)}>
+        Back to index
       </Button>
     </div>
   )

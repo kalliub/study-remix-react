@@ -7,6 +7,7 @@ import {
   Scripts,
   ScrollRestoration,
 } from "@remix-run/react";
+import styles from '~/styles/root.css'
 
 export const meta: MetaFunction = () => ({
   charset: "utf-8",
@@ -22,6 +23,10 @@ export const links: LinksFunction = () => [
     rel: 'stylesheet',
     href: 'https://fonts.googleapis.com/icon?family=Material+Icons'
   },
+  {
+    rel: 'stylesheet',
+    href: styles,
+  }
 ]
 
 export default function App() {
