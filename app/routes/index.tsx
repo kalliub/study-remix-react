@@ -1,25 +1,27 @@
-import type { MetaFunction } from "@remix-run/node";
-import { Link } from "@remix-run/react";
+import React from 'react';
+import type { MetaFunction } from '@remix-run/node';
 
-import { pageTitle } from "~/config/page";
+import { pageTitle } from 'config/page';
 
 export const meta: MetaFunction = () => ({
   title: pageTitle('Index'),
-})
+});
 
-export default function Index() {
+const Index = () => {
   return (
     <div>
-      <h1>Index Page</h1>
-      <span>
-        This is the first page!
-      </span>
+      <h1>Index page</h1>
+      <span>This is the first page!</span>
       <br />
       <ul>
         <li>
-          <Link to="/test">Test Page</Link>
+          <a data-testid="testPageLink" href="/test">
+            Test Page
+          </a>
         </li>
       </ul>
     </div>
   );
-}
+};
+
+export default Index;

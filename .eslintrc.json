@@ -5,15 +5,61 @@
   },
   "extends": [
     "plugin:react/recommended",
-    "standard-with-typescript",
+    "airbnb",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:prettier/recommended",
     "@remix-run/eslint-config",
     "@remix-run/eslint-config/node"
   ],
-  "overrides": [],
+  "parser": "@typescript-eslint/parser",
   "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
     "ecmaVersion": "latest",
-    "sourceType": "module"
+    "sourceType": "module",
+    "project": ["./tsconfig.json"]
   },
-  "plugins": ["react"],
-  "rules": {}
+  "plugins": ["react", "react-hooks", "@typescript-eslint", "prettier", "jest"],
+  "rules": {
+    "react/jsx-filename-extension": [1, { "extensions": [".tsx"] }],
+    "react/function-component-definition": [2, { "namedComponents": "arrow-function" }],
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "js": "never",
+        "jsx": "never",
+        "ts": "never",
+        "tsx": "never"
+      }
+    ],
+    "default-param-last": 0,
+    "no-use-before-define": ["error", { "functions": false, "classes": false, "variables": true }],
+    "@typescript-eslint/no-explicit-any": 0,
+    "no-shadow": 0,
+    "react/jsx-props-no-spreading": 0,
+    "react/require-default-props": 0,
+    "class-methods-use-this": 0,
+    "import/no-extraneous-dependencies": [0, { "devDependencies": ["**/*.test.ts", "**/*.test.tsx", "**/*.spec.ts", "**/*.spec.tsx"] }]
+  },
+
+  "settings": {
+    "import/resolver": {
+      "typescript": {
+        "extensions": [".ts", ".tsx"]
+      }
+    }
+  },
+  "ignorePatterns": ["serviceWorker.ts", "**/assets/*"],
+  "overrides": [
+    {
+      "files": ["**/*.ts", "**/*.tsx"],
+      "plugins": ["@typescript-eslint"],
+      "rules": {
+        "no-use-before-define": "off",
+        "@typescript-eslint/no-use-before-define": "off"
+      }
+    }
+  ]
 }
