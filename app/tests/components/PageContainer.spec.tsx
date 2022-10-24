@@ -1,4 +1,4 @@
-import PageContainer from 'components/PageContainer';
+import PageContainer from 'layout/PageContainer';
 import { setup } from 'tests/setup';
 
 describe('PageContainer component', () => {

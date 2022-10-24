@@ -1,39 +1,67 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import type { LoaderFunction, MetaFunction } from '@remix-run/node';
-import { useLoaderData } from '@remix-run/react';
+import { useLoaderData, useSearchParams } from '@remix-run/react';
 
 import { pageTitle } from 'config/page';
-import PageContainer from 'components/PageContainer';
+import PageContainer from 'layout/PageContainer';
 import FilmList from 'components/FilmList/index';
 import FilmsService from 'api/FilmsService';
 import type { IFilm } from 'common/film.interface';
-import { Button, Grid, TextField } from '@mui/material';
+import { Button, CircularProgress, Grid, TextField } from '@mui/material';
 
 export const meta: MetaFunction = () => ({
   title: pageTitle('All Movies'),
 });
 
-export const loader: LoaderFunction = () => {
+export const loader: LoaderFunction = async ({ request }) => {
   const filmsService = new FilmsService();
-  return filmsService.getAllFilms();
+  const url = new URL(request.url);
+  const searchTitle = url.searchParams.get('title');
+  const films = await filmsService.getAllFilms();
+  return films.filter(({ title }) => (searchTitle ? title.toLowerCase().includes(searchTitle.toLowerCase()) : true));
 };
 
 const Index = () => {
   const filmListData: IFilm[] = useLoaderData();
-  const [searchValue, setSearchValue] = useState('');
-
-  const handleSearchSubmit = () => {
-    setSearchValue('');
-  };
+  const [searchParams, setSearchParams] = useSearchParams();
+  const titleParam = searchParams.get('title');
+  const [loadingSearch, setLoadingSearch] = useState(false);
+  const [disabledSearch, setDisabledSearch] = useState(true);
 
   return (
     <PageContainer>
       <h1>Studio Ghibli Movies</h1>
-      <Grid container mb={5} alignItems="center">
-        <TextField variant="outlined" onChange={(e) => setSearchValue(e.target.value)} />
-        <Button size="small" variant="contained" onClick={handleSearchSubmit} sx={{ ml: 2, height: 40 }}>
-          Search
-        </Button>
+      <form>
+        <Grid container alignItems="center">
+          <TextField
+            onChange={(e) => setDisabledSearch(e.target.value.length === 0)}
+            name="title"
+            placeholder="Type a title..."
+            variant="outlined"
+          />
+          <Button
+            disabled={disabledSearch}
+            type="submit"
+            size="small"
+            variant="contained"
+            sx={{ ml: 2, height: 40 }}
+            onClick={() => setLoadingSearch(true)}
+          >
+            {loadingSearch ? <CircularProgress sx={{ color: 'white' }} size={15} /> : 'Search'}
+          </Button>
+        </Grid>
+      </form>
+      <Grid container my={2} flexDirection="column">
+        {titleParam && titleParam.length > 0 && (
+          <>
+            <span>
+              Showing results for: &quot;<b>{titleParam}</b>&quot;.
+            </span>
+            <Button sx={{ width: 'fit-content' }} variant="text" onClick={() => setSearchParams({ title: '' })}>
+              Clear results
+            </Button>
+          </>
+        )}
       </Grid>
       <FilmList filmListData={filmListData} />
     </PageContainer>

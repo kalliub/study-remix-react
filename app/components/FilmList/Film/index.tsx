@@ -34,7 +34,7 @@ const Film = ({ filmData }: { filmData: IFilm }) => {
           <img
             src={filmData.image}
             alt={filmData.title}
-            style={{ width: FILM_BLOCK_WIDTH, height: FILM_BLOCK_WIDTH * 1.5, scale: mouseHover ? '1.15' : '1', transition: '200ms' }}
+            style={{ width: FILM_BLOCK_WIDTH, height: FILM_BLOCK_WIDTH * 1.5, scale: mouseHover ? '1.15' : '1', transition: '2s' }}
           />
         </div>
         <span>{filmData.title}</span>

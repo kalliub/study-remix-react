@@ -1,5 +1,4 @@
 import type { ReactElement } from 'react';
-import './index.css';
 
 interface IPageContainerProps {
   children: ReactElement | ReactElement[];
