@@ -2,4 +2,5 @@ body {
   font-family: Montserrat, sans-serif;
   line-height: 1.4;
   margin-left: 30px;
+  box-sizing: border-box;
 }

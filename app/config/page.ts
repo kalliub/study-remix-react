@@ -1,1 +1,2 @@
-export const pageTitle = (page: string) => `Remix study | ${page}`;
+// eslint-disable-next-line import/prefer-default-export
+export const pageTitle = (page: string) => `${page} | Remix study`;

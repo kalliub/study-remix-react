@@ -6,12 +6,6 @@ describe('Index Page', () => {
 
   it('renders basic layout', () => {
     const { getByText } = component();
-    expect(getByText('Index page')).toBeInTheDocument();
-    expect(getByText('This is the first page!')).toBeInTheDocument();
-  });
-
-  it('renders test page link', () => {
-    const { getByTestId } = component();
-    expect(getByTestId('testPageLink')).toBeInTheDocument();
+    expect(getByText('Studio Ghibli Movies')).toBeInTheDocument();
   });
 });
