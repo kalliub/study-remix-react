@@ -9,7 +9,7 @@ interface IFilmListProps {
 
 const FilmList = ({ filmListData }: IFilmListProps) => {
   return (
-    <Grid container spacing={5} justifyContent="space-around">
+    <Grid container justifyContent="flex-start">
       {filmListData.map((film) => (
         <Film key={film.id} filmData={film} />
       ))}

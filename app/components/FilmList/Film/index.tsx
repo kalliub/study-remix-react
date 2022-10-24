@@ -1,20 +1,44 @@
-import type { IFilm } from 'common/film.interface';
 import { Grid } from '@mui/material';
-import type { LinksFunction } from '@remix-run/node';
-import style from './style.css';
 
-export const links: LinksFunction = () => [
-  {
-    rel: 'stylesheet',
-    href: style,
-  },
-];
+import type { IFilm } from 'common/film.interface';
+import MouseHoverWrapper from 'components/MouseHoverWrapper';
+import { useState } from 'react';
+
+const FILM_BLOCK_WIDTH = 200;
 
 const Film = ({ filmData }: { filmData: IFilm }) => {
+  const [mouseHover, setMouseHover] = useState(false);
   return (
-    <Grid item display="flex" flexDirection="column" alignContent="center" alignItems="center" textAlign="center" className="catalog-film">
-      <img src={filmData.image} alt={filmData.title} style={{ borderRadius: 10, height: 300 }} />
-      <span style={{ marginTop: 5, maxWidth: '80%' }}>{filmData.title}</span>
+    <Grid
+      item
+      display="flex"
+      flexDirection="column"
+      alignContent="center"
+      alignItems="center"
+      maxWidth={FILM_BLOCK_WIDTH}
+      textAlign="center"
+      mr={4}
+      my={1}
+    >
+      <MouseHoverWrapper onHover={(isHover) => setMouseHover(isHover)}>
+        <div
+          style={{
+            overflow: 'hidden',
+            width: FILM_BLOCK_WIDTH,
+            height: FILM_BLOCK_WIDTH * 1.5,
+            objectFit: 'cover',
+            borderRadius: 10,
+            marginBottom: 10,
+          }}
+        >
+          <img
+            src={filmData.image}
+            alt={filmData.title}
+            style={{ width: FILM_BLOCK_WIDTH, height: FILM_BLOCK_WIDTH * 1.5, scale: mouseHover ? '1.15' : '1', transition: '200ms' }}
+          />
+        </div>
+        <span>{filmData.title}</span>
+      </MouseHoverWrapper>
     </Grid>
   );
 };
