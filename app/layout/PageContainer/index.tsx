@@ -5,7 +5,15 @@ interface IPageContainerProps {
 }
 
 const PageContainer = ({ children }: IPageContainerProps) => {
-  return <div className="page-container">{children}</div>;
+  return (
+    <div
+      style={{
+        padding: 20,
+      }}
+    >
+      {children}
+    </div>
+  );
 };
 
 export default PageContainer;
