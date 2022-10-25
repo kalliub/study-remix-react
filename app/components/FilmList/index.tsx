@@ -12,9 +12,7 @@ const FilmList = ({ filmListData }: IFilmListProps) => {
   return (
     <Grid container justifyContent="flex-start">
       {filmListData.map((film) => (
-        <Link prefetch="intent" title={film.title} to={`films/${film.id}`} key={film.id}>
-          <Film filmData={film} />
-        </Link>
+        <Film filmData={film} key={film.id} />
       ))}
     </Grid>
   );
