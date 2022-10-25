@@ -12,6 +12,7 @@ const CharacterList = ({ characters = [] }: ICharacterListProps) => {
       <h2>Characters</h2>
       {characters.map((character) => (
         <NavLink
+          prefetch="render"
           to={`characters/${character.id}`}
           key={character.id}
           style={({ isActive }) => ({ backgroundColor: isActive ? 'rgba(0,0,0,0.07)' : undefined, borderRadius: 5 })}

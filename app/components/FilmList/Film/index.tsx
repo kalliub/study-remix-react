@@ -1,13 +1,15 @@
-import { Grid } from '@mui/material';
+import { useState } from 'react';
+import { CircularProgress, Grid } from '@mui/material';
+import { useTransition } from '@remix-run/react';
 
 import type { IFilm } from 'common/film.interface';
 import MouseEventWrapper from 'components/MouseEventWrapper';
-import { useState } from 'react';
 
 const FILM_BLOCK_WIDTH = 200;
 
 const Film = ({ filmData }: { filmData: IFilm }) => {
   const [mouseHover, setMouseHover] = useState(false);
+  const transition = useTransition();
   return (
     <Grid
       item
@@ -31,16 +33,20 @@ const Film = ({ filmData }: { filmData: IFilm }) => {
             marginBottom: 10,
           }}
         >
-          <img
-            src={filmData.image}
-            alt={filmData.title}
-            style={{
-              width: FILM_BLOCK_WIDTH,
-              height: FILM_BLOCK_WIDTH * 1.5,
-              scale: mouseHover ? '1.15' : '1',
-              transition: '2s',
-            }}
-          />
+          {transition.state === 'loading' && transition.location.pathname === `/films/${filmData.id}` ? (
+            <CircularProgress />
+          ) : (
+            <img
+              src={filmData.image}
+              alt={filmData.title}
+              style={{
+                width: FILM_BLOCK_WIDTH,
+                height: FILM_BLOCK_WIDTH * 1.5,
+                scale: mouseHover ? '1.15' : '1',
+                transition: '2s',
+              }}
+            />
+          )}
         </div>
         <span>{filmData.title}</span>
       </MouseEventWrapper>
