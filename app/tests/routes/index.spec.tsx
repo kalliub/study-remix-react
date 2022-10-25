@@ -1,4 +1,4 @@
-import Index from 'routes/';
+import Index from 'routes/Films/$filmId/$filmId';
 import { setup } from 'tests/setup';
 
 describe('Index Page', () => {

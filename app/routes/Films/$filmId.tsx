@@ -1,26 +1,38 @@
 import type { LoaderFunction } from '@remix-run/node';
-import { useLoaderData } from '@remix-run/react';
-import FilmsService from 'api/FilmsService';
+import { Outlet, useLoaderData } from '@remix-run/react';
+import invariant from 'tiny-invariant';
+
 import type { IFilm } from 'common/film.interface';
-import FilmBanner from 'components/Filmbanner';
+import FilmsService from 'api/FilmsService';
 import PageContainer from 'layout/PageContainer';
 
-export const loader: LoaderFunction = async ({ request }) => {
+import CharacterList from 'components/CharacterList';
+import FilmBanner from 'components/Filmbanner';
+import { Grid } from '@mui/material';
+
+export const loader: LoaderFunction = ({ params }) => {
+  invariant(params.filmId, 'Expected Film ID.');
   const filmsService = new FilmsService();
-  const url = new URL(request.url);
-  const filmId = url.pathname.split('/films/')[1];
-  return filmsService.getFilm(filmId);
+  return filmsService.getFilm(params.filmId);
 };
 
 const FilmPage = () => {
   const filmData = useLoaderData<IFilm>();
   return (
-    <>
+    <div>
       <FilmBanner filmData={filmData} />
       <PageContainer>
         <span>&emsp;{filmData.description}</span>
+        <Grid container>
+          <Grid item xs={6}>
+            <CharacterList characters={filmData.characters} />
+          </Grid>
+          <Grid item xs={6}>
+            <Outlet />
+          </Grid>
+        </Grid>
       </PageContainer>
-    </>
+    </div>
   );
 };
 

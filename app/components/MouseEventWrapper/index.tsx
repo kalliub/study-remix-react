@@ -1,11 +1,11 @@
 import type { ReactElement } from 'react';
 
-interface IMouseHoverWrapper {
+interface IMouseEventWrapper {
   children: ReactElement | ReactElement[];
   onHover: (isMouseHover: boolean) => void;
 }
 
-const MouseHoverWrapper = ({ children, onHover }: IMouseHoverWrapper) => {
+const MouseEventWrapper = ({ children, onHover }: IMouseEventWrapper) => {
   return (
     <div onMouseEnter={() => onHover(true)} onMouseLeave={() => onHover(false)}>
       {children}
@@ -13,4 +13,4 @@ const MouseHoverWrapper = ({ children, onHover }: IMouseHoverWrapper) => {
   );
 };
 
-export default MouseHoverWrapper;
+export default MouseEventWrapper;

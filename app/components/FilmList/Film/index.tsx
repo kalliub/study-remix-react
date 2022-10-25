@@ -1,7 +1,7 @@
 import { Grid } from '@mui/material';
 
 import type { IFilm } from 'common/film.interface';
-import MouseHoverWrapper from 'components/MouseHoverWrapper';
+import MouseEventWrapper from 'components/MouseEventWrapper';
 import { useState } from 'react';
 
 const FILM_BLOCK_WIDTH = 200;
@@ -20,7 +20,7 @@ const Film = ({ filmData }: { filmData: IFilm }) => {
       mr={4}
       my={1}
     >
-      <MouseHoverWrapper onHover={(isHover) => setMouseHover(isHover)}>
+      <MouseEventWrapper onHover={(isHover) => setMouseHover(isHover)}>
         <div
           style={{
             overflow: 'hidden',
@@ -34,11 +34,16 @@ const Film = ({ filmData }: { filmData: IFilm }) => {
           <img
             src={filmData.image}
             alt={filmData.title}
-            style={{ width: FILM_BLOCK_WIDTH, height: FILM_BLOCK_WIDTH * 1.5, scale: mouseHover ? '1.15' : '1', transition: '2s' }}
+            style={{
+              width: FILM_BLOCK_WIDTH,
+              height: FILM_BLOCK_WIDTH * 1.5,
+              scale: mouseHover ? '1.15' : '1',
+              transition: '2s',
+            }}
           />
         </div>
         <span>{filmData.title}</span>
-      </MouseHoverWrapper>
+      </MouseEventWrapper>
     </Grid>
   );
 };

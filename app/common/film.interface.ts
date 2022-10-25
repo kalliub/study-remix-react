@@ -1,3 +1,12 @@
+export interface IFilmCharacter {
+  id: string;
+  name: string;
+  gender?: string;
+  age?: string;
+  eyeColor?: string;
+  hairColor?: string;
+}
+
 export interface IFilm {
   id: string;
   title: string;
@@ -15,4 +24,5 @@ export interface IFilm {
   locations: string[];
   vehicles: string[];
   url: string;
+  characters?: IFilmCharacter[];
 }
