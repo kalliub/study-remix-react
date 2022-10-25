@@ -23,7 +23,11 @@ const Film = ({ filmData }: { filmData: IFilm }) => {
       my={1}
     >
       <MouseEventWrapper onHover={(isHover) => setMouseHover(isHover)}>
-        <Link prefetch="intent" title={filmData.title} to={`films/${filmData.id}`}>
+        <Link
+          prefetch="intent"
+          title={filmData.title}
+          to={`films/${filmData.id}`}
+        >
           <div
             style={{
               overflow: 'hidden',
@@ -34,7 +38,8 @@ const Film = ({ filmData }: { filmData: IFilm }) => {
               marginBottom: 10,
             }}
           >
-            {transition.state === 'loading' && transition.location.pathname === `/films/${filmData.id}` ? (
+            {transition.state === 'loading' &&
+            transition.location.pathname === `/films/${filmData.id}` ? (
               <CircularProgress />
             ) : (
               <img
@@ -44,7 +49,7 @@ const Film = ({ filmData }: { filmData: IFilm }) => {
                   width: FILM_BLOCK_WIDTH,
                   height: FILM_BLOCK_WIDTH * 1.5,
                   scale: mouseHover ? '1.15' : '1',
-                  transition: '2s',
+                  transition: '4s',
                 }}
               />
             )}

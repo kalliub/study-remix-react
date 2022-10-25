@@ -16,7 +16,10 @@ const CharacterList = ({ characters = [] }: ICharacterListProps) => {
           prefetch="render"
           to={`characters/${character.id}`}
           key={character.id}
-          style={({ isActive }) => ({ backgroundColor: isActive ? 'rgba(0,0,0,0.07)' : undefined, borderRadius: 5 })}
+          style={({ isActive }) => ({
+            backgroundColor: isActive ? 'rgba(0,0,0,0.07)' : undefined,
+            borderRadius: 5,
+          })}
         >
           <Button variant="text" sx={{ color: 'black' }}>
             {character.name}

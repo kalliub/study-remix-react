@@ -1,5 +1,14 @@
 import type { LinksFunction, MetaFunction } from '@remix-run/node';
-import { Links, LiveReload, Meta, Outlet, Scripts, ScrollRestoration } from '@remix-run/react';
+import {
+  Links,
+  LiveReload,
+  Meta,
+  Outlet,
+  Scripts,
+  ScrollRestoration,
+} from '@remix-run/react';
+import ErrorAlert from 'components/ErrorAlert';
+import { pageTitle } from 'config/page';
 import styles from 'styles/root.css';
 
 export const meta: MetaFunction = () => ({
@@ -40,3 +49,20 @@ const App = () => {
 };
 
 export default App;
+
+export const ErrorBoundary = ({ error }: { error: Error }) => (
+  <html lang="en">
+    <head>
+      <title>{pageTitle('Error')}</title>
+      <Meta />
+      <Links />
+    </head>
+    <body>
+      <ErrorAlert
+        title="Generic Error!"
+        body={`[${error.name}] ${error.message}`}
+      />
+      <Scripts />
+    </body>
+  </html>
+);
