@@ -1,10 +1,9 @@
 import { useState } from 'react';
 import { Button, CircularProgress, Grid, TextField } from '@mui/material';
-import { Form, useNavigate, useSearchParams } from '@remix-run/react';
+import { Form, Link, useSearchParams } from '@remix-run/react';
 
 const FilmSearchEngine = () => {
   const [searchParams] = useSearchParams();
-  const navigate = useNavigate();
   const titleParam = searchParams.get('title');
   const [disableSubmit, setDisableSubmit] = useState(true);
   const [loading, setLoading] = useState(false);
@@ -26,7 +25,11 @@ const FilmSearchEngine = () => {
             sx={{ ml: 2, height: 40 }}
             onClick={() => setLoading(true)}
           >
-            {loading ? <CircularProgress sx={{ color: 'white' }} size={15} /> : 'Search'}
+            {loading ? (
+              <CircularProgress sx={{ color: 'white' }} size={15} />
+            ) : (
+              'Search'
+            )}
           </Button>
         </Grid>
       </Form>
@@ -36,9 +39,11 @@ const FilmSearchEngine = () => {
             <span>
               Showing results for: &quot;<b>{titleParam}</b>&quot;.
             </span>
-            <Button sx={{ width: 'fit-content' }} variant="text" onClick={() => navigate('/')}>
-              Clear
-            </Button>
+            <Link to="/" prefetch="render">
+              <Button sx={{ width: 'fit-content' }} variant="text">
+                Clear
+              </Button>
+            </Link>
           </>
         )}
       </Grid>
