@@ -18,7 +18,9 @@ export const loader: LoaderFunction = async ({ request }) => {
   const url = new URL(request.url);
   const searchTitle = url.searchParams.get('title');
   const films = await filmsService.getAllFilms();
-  return films.filter(({ title }) => (searchTitle ? title.toLowerCase().includes(searchTitle.toLowerCase()) : true));
+  return films.filter(({ title }) =>
+    searchTitle ? title.toLowerCase().includes(searchTitle.toLowerCase()) : true
+  );
 };
 
 const Index = () => {

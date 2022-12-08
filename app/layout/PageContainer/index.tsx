@@ -1,3 +1,4 @@
+import { Grid } from '@mui/material';
 import type { ReactElement } from 'react';
 
 interface IPageContainerProps {
@@ -5,15 +6,7 @@ interface IPageContainerProps {
 }
 
 const PageContainer = ({ children }: IPageContainerProps) => {
-  return (
-    <div
-      style={{
-        padding: 20,
-      }}
-    >
-      {children}
-    </div>
-  );
+  return <Grid container>{children}</Grid>;
 };
 
 export default PageContainer;

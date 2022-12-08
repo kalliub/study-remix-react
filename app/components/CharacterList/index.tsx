@@ -7,7 +7,7 @@ interface ICharacterListProps {
 }
 
 const CharacterList = ({ characters = [] }: ICharacterListProps) => {
-  if (characters.length === 0) return false;
+  if (characters.length === 0) return <div />;
   return (
     <Grid container flexDirection="column" alignItems="flex-start">
       <h2>Characters</h2>
